@@ -1,0 +1,14 @@
+# Build da imagem do Node:
+docker build -f Dockerfile.app -t node-server .
+
+# Build da imagem de teste:
+docker build -f Dockerfile.test -t node-tester .
+
+# Criar rede Docker:
+docker network create node-net
+
+# Subir container do servido:
+docker run -d --name app --network node-net node-server
+
+# Executar container de test:
+docker run --rm --network node-net node-tester
